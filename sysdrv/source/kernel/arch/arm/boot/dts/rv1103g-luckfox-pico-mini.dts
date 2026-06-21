@@ -61,12 +61,16 @@
 /* SPI0_M0 */
 &spi0 {
 	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&spi0m0_clk &spi0m0_miso &spi0m0_mosi &spi0m0_cs0 &spi0_cs1_gpio>;
+	cs-gpios = <0>, <&gpio0 RK_PA4 GPIO_ACTIVE_LOW>;
+	num-cs = <2>;
 };
 
 /**********I2C**********/
 /* I2C3_M1 */
 &i2c3 {
-	status = "disabled";
+	status = "okay";
 	clock-frequency = <100000>;
 };
 
@@ -85,4 +89,54 @@
 /* PWM1_M0 */
 &pwm1 {
 	status = "disabled";
+};
+
+/**********GPIO**********/
+&gpio1 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&gpio1_d1_gpio &gpio1_c4_gpio &gpio1_c5_gpio
+		     &gpio1_c6_gpio &gpio1_c7_gpio>;
+};
+
+&gpio4 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&gpio4_c0_gpio &gpio4_c1_gpio>;
+};
+
+&pinctrl {
+	spi0-cs1-gpio {
+		spi0_cs1_gpio: spi0-cs1-gpio {
+			rockchip,pins = <0 RK_PA4 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+	};
+
+	luckfox-mini-b-gpio {
+		gpio1_d1_gpio: gpio1-d1-gpio {
+			rockchip,pins = <1 RK_PD1 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+
+		gpio4_c0_gpio: gpio4-c0-gpio {
+			rockchip,pins = <4 RK_PC0 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+
+		gpio4_c1_gpio: gpio4-c1-gpio {
+			rockchip,pins = <4 RK_PC1 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+
+		gpio1_c6_gpio: gpio1-c6-gpio {
+			rockchip,pins = <1 RK_PC6 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+
+		gpio1_c7_gpio: gpio1-c7-gpio {
+			rockchip,pins = <1 RK_PC7 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+
+		gpio1_c5_gpio: gpio1-c5-gpio {
+			rockchip,pins = <1 RK_PC5 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+
+		gpio1_c4_gpio: gpio1-c4-gpio {
+			rockchip,pins = <1 RK_PC4 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+	};
 };
