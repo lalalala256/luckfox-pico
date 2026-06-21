@@ -34,3 +34,73 @@
 	u-boot,dm-spl;
 	status = "okay";
 };
+
+&spi0 {
+	/* Keep CS0 on gpio1_c0 and move CS1 to gpio0_a4 as GPIO chip select. */
+	pinctrl-names = "default";
+	pinctrl-0 = <&spi0m0_cs0 &spi0m0_pins &spi0_cs1_gpio>;
+	cs-gpios = <&gpio1 RK_PC0 GPIO_ACTIVE_LOW>, <&gpio0 RK_PA4 GPIO_ACTIVE_LOW>;
+	num-cs = <2>;
+	status = "okay";
+};
+
+&i2c3 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&i2c3m1_xfer>;
+	clock-frequency = <100000>;
+	status = "okay";
+};
+
+&gpio1 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&gpio1_d1_gpio &gpio1_c4_gpio &gpio1_c5_gpio
+			     &gpio1_c6_gpio &gpio1_c7_gpio>;
+
+	gpio1_d1_input {
+		gpio-hog;
+		gpios = <RK_PD1 GPIO_ACTIVE_HIGH>;
+		input;
+		line-name = "gpio1_d1_input";
+	};
+};
+
+&gpio4 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&gpio4_c0_gpio &gpio4_c1_gpio>;
+};
+
+&pinctrl {
+	luckfox-mini-b-gpio {
+		spi0_cs1_gpio: spi0-cs1-gpio {
+			rockchip,pins = <0 RK_PA4 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+
+		gpio1_d1_gpio: gpio1-d1-gpio {
+			rockchip,pins = <1 RK_PD1 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+
+		gpio4_c0_gpio: gpio4-c0-gpio {
+			rockchip,pins = <4 RK_PC0 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+
+		gpio4_c1_gpio: gpio4-c1-gpio {
+			rockchip,pins = <4 RK_PC1 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+
+		gpio1_c6_gpio: gpio1-c6-gpio {
+			rockchip,pins = <1 RK_PC6 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+
+		gpio1_c7_gpio: gpio1-c7-gpio {
+			rockchip,pins = <1 RK_PC7 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+
+		gpio1_c5_gpio: gpio1-c5-gpio {
+			rockchip,pins = <1 RK_PC5 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+
+		gpio1_c4_gpio: gpio1-c4-gpio {
+			rockchip,pins = <1 RK_PC4 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+	};
+};
