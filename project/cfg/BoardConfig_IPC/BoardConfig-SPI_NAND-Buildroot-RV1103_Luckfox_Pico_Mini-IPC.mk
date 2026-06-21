@@ -26,9 +26,6 @@ export RK_BOOT_MEDIUM=spi_nand
 # Uboot defconfig fragment
 export RK_UBOOT_DEFCONFIG_FRAGMENT=rk-sfc.config
 
-# specify post.sh for delete/overlay files
-# export RK_PRE_BUILD_OEM_SCRIPT=rv1103-spi_nor-post.sh
-
 # config partition in environment
 # RK_PARTITION_CMD_IN_ENV format:
 #     <partdef>[,<partdef>]
@@ -83,6 +80,9 @@ export RK_UBOOT_DEFCONFIG=luckfox_rv1106_uboot_defconfig
 # Kernel defconfig
 export RK_KERNEL_DEFCONFIG=luckfox_rv1106_linux_defconfig
 
+# Kernel defconfig fragment for Mini B (disable camera/CSI/ISP/NPU/WiFi)
+export RK_KERNEL_DEFCONFIG_FRAGMENT=luckfox-pico-mini-nocsi.config
+
 # Config sensor IQ files
 # RK_CAMERA_SENSOR_IQFILES format:
 #     "iqfile1 iqfile2 iqfile3 ..."
@@ -103,8 +103,8 @@ export RK_BUILD_APP_TO_OEM_PARTITION=y
 # enable rockchip test
 export RK_ENABLE_ROCKCHIP_TEST=y
 
-# enable rockchip wifi
-export RK_ENABLE_WIFI=y
+# enable rockchip wifi (Mini B has no WiFi)
+# export RK_ENABLE_WIFI=y
 
 # config wifi ssid and passwd
 export LF_WIFI_SSID="Your wifi ssid"
@@ -115,7 +115,7 @@ export LF_WIFI_PSK="Your wifi password"
 #################################################
 
 # specify pre.sh for delete/overlay files
-export RK_PRE_BUILD_OEM_SCRIPT=luckfox-buildroot-oem-pre.sh
+export RK_PRE_BUILD_OEM_SCRIPT=luckfox-buildroot-nocsi-oem-pre.sh
 
 # specify post.sh for delete/overlay files
 export RK_PRE_BUILD_USERDATA_SCRIPT=luckfox-userdata-pre.sh

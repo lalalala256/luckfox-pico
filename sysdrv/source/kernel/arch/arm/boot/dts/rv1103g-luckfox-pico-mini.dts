@@ -98,6 +98,68 @@
 		     &gpio1_c6_gpio &gpio1_c7_gpio>;
 };
 
+/********** Disable Camera/CSI/ISP - Mini B has no camera **********/
+&i2c4 {
+	status = "disabled";
+};
+
+&csi2_dphy_hw {
+	status = "disabled";
+};
+
+&csi2_dphy0 {
+	status = "disabled";
+};
+
+&mipi0_csi2 {
+	status = "disabled";
+};
+
+&rkcif {
+	status = "disabled";
+};
+
+&rkcif_mipi_lvds {
+	status = "disabled";
+};
+
+&rkcif_mipi_lvds_sditf {
+	status = "disabled";
+};
+
+&rkisp {
+	status = "disabled";
+};
+
+&rkisp_vir0 {
+	status = "disabled";
+};
+
+/********** Disable unused multimedia blocks **********/
+&npu {
+	status = "disabled";
+};
+
+&rkvenc {
+	status = "disabled";
+};
+
+&rkvenc_pp {
+	status = "disabled";
+};
+
+&rve {
+	status = "disabled";
+};
+
+&rkdvbm {
+	status = "disabled";
+};
+
+&rga2 {
+	status = "disabled";
+};
+
 &gpio4 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&gpio4_c0_gpio &gpio4_c1_gpio>;
