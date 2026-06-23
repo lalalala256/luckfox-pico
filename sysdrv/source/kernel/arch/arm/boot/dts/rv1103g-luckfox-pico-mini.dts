@@ -65,6 +65,12 @@
 	pinctrl-0 = <&spi0m0_clk &spi0m0_miso &spi0m0_mosi &spi0m0_cs0 &spi0_cs1_gpio>;
 	cs-gpios = <0>, <&gpio0 RK_PA4 GPIO_ACTIVE_LOW>;
 	num-cs = <2>;
+
+	spidev@1 {
+		compatible = "rockchip,spidev";
+		spi-max-frequency = <50000000>;
+		reg = <1>;
+	};
 };
 
 /**********I2C**********/
