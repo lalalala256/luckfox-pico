@@ -10,6 +10,7 @@
 #include <linux/init.h>
 #include <linux/kernel.h>
 #include <linux/module.h>
+#include <linux/property.h>
 #include <video/mipi_display.h>
 
 #include "fbtft.h"
@@ -156,7 +157,14 @@ static int init_display(struct fbtft_par *par)
  */
 static int set_var(struct fbtft_par *par)
 {
+	struct device *dev = par->spi ? &par->spi->dev : &par->pdev->dev;
+	u32 madctl;
 	u8 madctl_par = 0;
+
+	if (!device_property_read_u32(dev, "madctl", &madctl)) {
+		write_reg(par, MIPI_DCS_SET_ADDRESS_MODE, (u8)madctl);
+		return 0;
+	}
 
 	if (par->bgr)
 		madctl_par |= MADCTL_BGR;
