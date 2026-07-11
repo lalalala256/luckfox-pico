@@ -94,14 +94,8 @@
 		interrupt-parent = <&gpio1>;
 		interrupts = <RK_PC5 IRQ_TYPE_EDGE_FALLING>;
 		reset-gpios = <&gpio4 RK_PC1 GPIO_ACTIVE_LOW>;
-		/*
-		 * Equivalent to user-space transform: --swap-xy --flip-y
-		 * (kernel applies inversion before swap, so use inverted-x + swapped-x-y)
-		 */
-		touchscreen-size-x = <240>;
-		touchscreen-size-y = <320>;
-		touchscreen-inverted-x;
-		touchscreen-swapped-x-y;
+		touchscreen-size-x = <320>;
+		touchscreen-size-y = <240>;
 		wakeup-source;
 	};
 };
