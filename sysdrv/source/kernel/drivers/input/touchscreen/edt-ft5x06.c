@@ -1376,7 +1376,6 @@ static const struct i2c_device_id edt_ft5x06_ts_id[] = {
 	{ .name = "ev-ft5726", .driver_data = (long)&edt_ft5506_data },
 	/* Note no edt- prefix for compatibility with the ft6236.c driver */
 	{ .name = "ft6236", .driver_data = (long)&edt_ft6236_data },
-	{ .name = "ft6336", .driver_data = (long)&edt_ft6236_data },
 	{ /* sentinel */ }
 };
 MODULE_DEVICE_TABLE(i2c, edt_ft5x06_ts_id);
@@ -1389,7 +1388,6 @@ static const struct of_device_id edt_ft5x06_of_match[] = {
 	{ .compatible = "evervision,ev-ft5726", .data = &edt_ft5506_data },
 	/* Note focaltech vendor prefix for compatibility with ft6236.c */
 	{ .compatible = "focaltech,ft6236", .data = &edt_ft6236_data },
-	{ .compatible = "focaltech,ft6336", .data = &edt_ft6236_data },
 	{ /* sentinel */ }
 };
 MODULE_DEVICE_TABLE(of, edt_ft5x06_of_match);

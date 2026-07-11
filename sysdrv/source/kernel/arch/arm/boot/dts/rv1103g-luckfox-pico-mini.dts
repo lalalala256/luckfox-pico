@@ -66,19 +66,10 @@
 	cs-gpios = <0>, <&gpio0 RK_PA4 GPIO_ACTIVE_LOW>;
 	num-cs = <2>;
 
-	fbtft@1 {
-		compatible = "sitronix,st7789v";
+	spidev@1 {
+		compatible = "rockchip,spidev";
+		spi-max-frequency = <50000000>;
 		reg = <1>;
-		spi-max-frequency = <32000000>;
-		width = <320>;
-		height = <240>;
-		madctl = <0x70>;
-		fps = <30>;
-		buswidth = <8>;
-		debug = <0x0>;
-		led-gpios = <&gpio4 RK_PC0 GPIO_ACTIVE_HIGH>;
-		dc-gpios = <&gpio1 RK_PC6 GPIO_ACTIVE_HIGH>;
-		reset-gpios = <&gpio1 RK_PC7 GPIO_ACTIVE_LOW>;
 	};
 };
 
@@ -87,17 +78,6 @@
 &i2c3 {
 	status = "okay";
 	clock-frequency = <100000>;
-
-	touchscreen@38 {
-		compatible = "focaltech,ft6336";
-		reg = <0x38>;
-		interrupt-parent = <&gpio1>;
-		interrupts = <RK_PC5 IRQ_TYPE_EDGE_FALLING>;
-		reset-gpios = <&gpio4 RK_PC1 GPIO_ACTIVE_LOW>;
-		touchscreen-size-x = <320>;
-		touchscreen-size-y = <240>;
-		wakeup-source;
-	};
 };
 
 /**********UART**********/
