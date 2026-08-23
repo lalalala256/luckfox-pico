@@ -91,6 +91,12 @@
 	status = "disabled";
 };
 
+/**********DEBUG UART (ttyFIQ0 console)**********/
+/* Serial console baud rate: 9600 */
+&fiq_debugger {
+	rockchip,baudrate = <9600>;
+};
+
 /**********PWM**********/
 /* PWM1_M0 */
 &pwm1 {

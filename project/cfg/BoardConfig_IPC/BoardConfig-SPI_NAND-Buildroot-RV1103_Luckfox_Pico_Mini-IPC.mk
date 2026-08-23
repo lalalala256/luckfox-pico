@@ -24,7 +24,8 @@ export RK_KERNEL_DTS=rv1103g-luckfox-pico-mini.dts
 export RK_BOOT_MEDIUM=spi_nand
 
 # Uboot defconfig fragment
-export RK_UBOOT_DEFCONFIG_FRAGMENT=rk-sfc.config
+# luckfox-pico-mini-baudrate.config sets the serial console baud rate to 9600
+export RK_UBOOT_DEFCONFIG_FRAGMENT="rk-sfc.config luckfox-pico-mini-baudrate.config"
 
 # config partition in environment
 # RK_PARTITION_CMD_IN_ENV format:

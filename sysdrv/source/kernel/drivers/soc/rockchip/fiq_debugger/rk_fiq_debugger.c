@@ -111,6 +111,10 @@ static int debug_port_init(struct platform_device *pdev)
 	case 1500000:
 		dll = 0x1;
 		break;
+	case 9600:
+		/* 24MHz / (16 * 156) = 9615 baud */
+		dll = 0x9c;
+		break;
 	case 115200:
 	default:
 		dll = 0xd;
@@ -251,6 +255,8 @@ static void console_putc(struct platform_device *pdev, unsigned int c)
 
 	if (t->baudrate == 115200)
 		us = 5160;	/* the time to send 60 byte for baudrate 115200 */
+	else if (t->baudrate == 9600)
+		us = 62500;	/* the time to send 60 byte for baudrate 9600 */
 
 	while (!(rk_fiq_read(t, UART_USR) & UART_USR_TX_FIFO_NOT_FULL) &&
 	       count--)
@@ -269,6 +275,8 @@ static void console_flush(struct platform_device *pdev)
 
 	if (t->baudrate == 115200)
 		us = 5500;	/* the time to send 64 byte for baudrate 115200 */
+	else if (t->baudrate == 9600)
+		us = 67000;	/* the time to send 64 byte for baudrate 9600 */
 
 	while (!(rk_fiq_read_lsr(t) & UART_LSR_TEMT) && count--)
 		usleep_range(us, us + us / 20);
