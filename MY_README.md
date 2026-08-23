@@ -1,3 +1,9 @@
+# build
+./build.sh lunch
+./build.sh buildrootconfig
+./build.sh uboot
+./build.sh kernel
+
 # 刷uboot.img
 dd if=/tmp/uboot.img of=/dev/mmcblk1p3 bs=4K conv=fsync
 dd if=uboot.img of=/dev/mmcblk1p3 bs=4K conv=fsync
