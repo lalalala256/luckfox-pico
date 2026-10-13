@@ -66,16 +66,17 @@
 	cs-gpios = <0>, <&gpio0 RK_PA4 GPIO_ACTIVE_LOW>, <&gpio1 RK_PC4 GPIO_ACTIVE_LOW>;
 	num-cs = <3>;
 
-	/* CS1 (spidev0.1) is used by the MI48 thermal camera */
 	spidev@1 {
 		compatible = "rockchip,spidev";
 		spi-max-frequency = <50000000>;
 		reg = <1>;
 	};
 
-	/* CS2 (spidev0.2) is reserved for the ESP-Hosted esp32_spi driver,
-	 * which registers itself on bus0 / chip-select 2 via spi_new_device().
-	 * It must not be claimed by spidev here. */
+	spidev@2 {
+		compatible = "rockchip,spidev";
+		spi-max-frequency = <50000000>;
+		reg = <2>;
+	};
 };
 
 /**********I2C**********/
@@ -111,7 +112,7 @@
 /**********GPIO**********/
 &gpio1 {
 	pinctrl-names = "default";
-	pinctrl-0 = <&gpio1_d0_gpio &gpio1_d1_gpio &gpio1_c5_gpio
+	pinctrl-0 = <&gpio1_d1_gpio &gpio1_c5_gpio
 		     &gpio1_c6_gpio &gpio1_c7_gpio>;
 };
 
@@ -196,10 +197,6 @@
 	};
 
 	luckfox-mini-b-gpio {
-		gpio1_d0_gpio: gpio1-d0-gpio {
-			rockchip,pins = <1 RK_PD0 RK_FUNC_GPIO &pcfg_pull_none>;
-		};
-
 		gpio1_d1_gpio: gpio1-d1-gpio {
 			rockchip,pins = <1 RK_PD1 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
